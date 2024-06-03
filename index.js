@@ -3,7 +3,8 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import { validationResult } from "express-validator";
 
-import { registerValidator } from './validations/auth.js'
+import { registerValidator } from './validations/auth.js';
+import UserModel from './models/User';
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/",
 
@@ -21,6 +22,13 @@ app.post('/auth/register', registerValidator, (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json(errors.array());
     }
+
+    const doc = new UserModel({
+        fullName: req.body.fullName,
+        email: req.body.email,
+        passwordHash: req.body.password,
+        avatarUrl: req.body.avatarUrl,
+    });
 
     res.json({
         success: true,
