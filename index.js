@@ -4,7 +4,7 @@ import mongoose from "mongoose";
 import { validationResult } from "express-validator";
 
 import { registerValidator } from './validations/auth.js';
-import UserModel from './models/User';
+import UserModel from './models/User.js';
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/",
 
