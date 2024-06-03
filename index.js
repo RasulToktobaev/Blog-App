@@ -2,7 +2,7 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
-import second from './validations/auth.js'
+import {registerValidator} from './validations/auth.js'
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/",
 
@@ -15,7 +15,7 @@ app.use(express.json());
 
 
 
-app.post('/auth/register', (req, res) => {
+app.post('/auth/register', registerValidator,(req, res) => {
    
 });
 
