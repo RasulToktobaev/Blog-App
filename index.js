@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import { validationResult } from "express-validator";
-
 import { registerValidator } from './validations/auth.js';
+
 
 import UserModel from './models/User.js';
 
@@ -41,9 +41,9 @@ app.post('/auth/register', registerValidator, async (req, res) => {
     res.json(user);  
 });
 
-app.listen(4444, (err) => {
-    if (err) {
-        return console.log(err);
-    }
-    console.log('Server is running on port 3000');
-});
+// app.listen(4444, (err) => {
+//     if (err) {
+//         return console.log(err);
+//     }
+//     console.log('Server is running on port 3000');
+// });
