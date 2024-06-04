@@ -32,13 +32,13 @@ app.post('/auth/register', registerValidator, async (req, res) => {
     const doc = new UserModel({
         fullName: req.body.fullName,
         email: req.body.email,
-        passwordHash: req.body.password,
         avatarUrl: req.body.avatarUrl,
+        passwordHash,
     });
 
-    res.json({
-        success: true,
-    })
+    const user = await doc.save();
+
+    res.json(user);  
 });
 
 app.listen(4444, (err) => {
