@@ -8,7 +8,7 @@ import { registerValidator } from './validations/auth.js';
 
 import UserModel from './models/User.js';
 
-mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/",
+mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/blog",
 
 ).then(() => console.log('Connected to database'))
     .catch((err) => console.log("Db error", err));
