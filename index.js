@@ -19,6 +19,18 @@ app.use(express.json());
 
 
 
+app.post('/auth/login', async (req, res) => {
+    try {
+        const user = await UserModel.findOne({ email: req.body.email });
+
+        if(!user) {
+            return res.status(404).json({ message: 'Пользователь не найден' });
+        }
+    } catch (err) {
+
+    }
+})
+
 app.post('/auth/register', registerValidator, async (req, res) => {
     try {
         const errors = validationResult(req);
