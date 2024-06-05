@@ -28,27 +28,32 @@ app.post('/auth/register', registerValidator, async (req, res) => {
 
         const password = req.body.password;
         const salt = await bcrypt.genSalt(10);
-        const passwordHash = await bcrypt.hash(password, salt);
+        const hash = await bcrypt.hash(password, salt);
 
         const doc = new UserModel({
             fullName: req.body.fullName,
             email: req.body.email,
             avatarUrl: req.body.avatarUrl,
-            passwordHash,
+            passwordHash: hash,
         });
 
         const user = await doc.save();
 
         const token = jwt.sign({
-            _id:user._id,
-        }, 
-        'secret123',
-        {
-            expiresIn: "30days",
-        }
-    );
+            _id: user._id,
+        },
+            'secret123',
+            {
+                expiresIn: "30days",
+            }
+        );
 
-        res.json(user);
+        const { passwordHash, ...userData } = user._doc;
+
+        res.json({
+            ...userData,
+            token,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json({
