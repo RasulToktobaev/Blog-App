@@ -20,25 +20,29 @@ app.use(express.json());
 
 
 app.post('/auth/register', registerValidator, async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json(errors.array());
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).json(errors.array());
+        }
+
+        const password = req.body.password;
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash(password, salt);
+
+        const doc = new UserModel({
+            fullName: req.body.fullName,
+            email: req.body.email,
+            avatarUrl: req.body.avatarUrl,
+            passwordHash,
+        });
+
+        const user = await doc.save();
+
+        res.json(user);
+    } catch (err) {
+
     }
-
-    const password = req.body.password;
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(password, salt);
-
-    const doc = new UserModel({
-        fullName: req.body.fullName,
-        email: req.body.email,
-        avatarUrl: req.body.avatarUrl,
-        passwordHash,
-    });
-
-    const user = await doc.save();
-
-    res.json(user);  
 });
 
 app.listen(4444, (err) => {
