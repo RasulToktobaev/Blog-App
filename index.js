@@ -39,9 +39,21 @@ app.post('/auth/register', registerValidator, async (req, res) => {
 
         const user = await doc.save();
 
+        const token = jwt.sign({
+            _id:user._id,
+        }, 
+        'secret123',
+        {
+            expiresIn: "30days",
+        }
+    );
+
         res.json(user);
     } catch (err) {
-
+        console.log(err);
+        res.status(500).json({
+            message: "Ошибка при регистраций",
+        });
     }
 });
 
