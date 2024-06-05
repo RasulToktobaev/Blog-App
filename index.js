@@ -24,7 +24,13 @@ app.post('/auth/login', async (req, res) => {
         const user = await UserModel.findOne({ email: req.body.email });
 
         if(!user) {
-            return res.status(404).json({ message: 'Пользователь не найден' });
+            return req.status(404).json({ message: 'Пользователь не найден' });
+        }
+
+        const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash);
+
+        if(!isValidPass) {
+            return req.status(400).json({ message: 'Неверный пароль' });
         }
     } catch (err) {
 
