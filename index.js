@@ -99,8 +99,12 @@ app.post('/auth/register', registerValidator, async (req, res) => {
 });
 
 
-app.get("/auth/me", (req, res) => {
+app.get("/auth/me", checkAuth, (req, res) => {
+    try {
 
+    } catch (err) {
+        
+    }
 })
 
 app.listen(4444, (err) => {
