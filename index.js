@@ -99,8 +99,9 @@ app.post('/auth/register', registerValidator, async (req, res) => {
 });
 
 
-app.get("/auth/me", checkAuth, (req, res) => {
+app.get("/auth/me", checkAuth, async (req, res) => {
     try {
+        const user = await UserModel.findById(req.userId);
         res.json({
           success: true,
         });
