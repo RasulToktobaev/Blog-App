@@ -16,7 +16,7 @@ app.use(express.json());
 
 
 
-app.post('/auth/login', UserController.login); 
+app.post('/auth/login', userController.login); 
 app.post('/auth/register', registerValidator, userController.register);
 app.get("/auth/me", checkAuth, userController.getMe)
 
