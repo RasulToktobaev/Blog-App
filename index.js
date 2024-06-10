@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { registerValidator, loginValidator } from './validations.js';
 import checkAuth  from './utils/checkAuth.js';
 import * as userController from './controllers/userController.js';
+import * as postController from './controllers/postController.js';
 
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/blog",
