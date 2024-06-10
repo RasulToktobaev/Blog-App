@@ -1,5 +1,19 @@
 import PostModel from "../models/post.js";
 
+export const getAll = async (req, res) => {
+    try {
+        const posts = await PostModel.find().populate('user').exec();
+
+        res.json(posts);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({
+            message: "Не удалось получить статьи",
+        });
+    }
+}
+
+
 
 export const create = async (req, res) => {
     try {
