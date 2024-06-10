@@ -19,11 +19,16 @@ const postSchema = new mongoose.Schema({
         default: 0,
 
     },
-    avatarUrl: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"User",
+        required: true,
+    },
+    imageUrl: String,
 },
     {
         timestamps: true,
     },
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Post', postSchema);
