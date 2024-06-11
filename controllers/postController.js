@@ -29,9 +29,6 @@ export const create = async (req, res) => {
 
         res.json(post);
     } catch (err) {
-        console.log(err);
-        res.status(500).json({
-            message: "Ошибка при созданий статьи",
-        });
+        
     }
 }
