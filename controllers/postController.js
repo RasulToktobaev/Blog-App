@@ -16,10 +16,33 @@ export const getAll = async (req, res) => {
 
 export const getOne = async (req, res) => {
     try {
-        const postId = 
-        const posts = await PostModel.find().populate('user').exec();
+        const postId = req.params.id;
 
-        res.json(posts);
+        PostModel.findOneAndUpdate({
+            _id: postId,
+
+        }, {
+            $inc: { viewsCount: 1 },
+        },
+        {
+            returnDocument: 'after',
+        },
+        (err, doc) => {
+            if (err) {
+                console.log(err);
+              return res.status(500).json({
+                    message: "Не удалось вернуть статью",
+                });
+            }
+
+            if(!doc) {
+                return res.status(404).json({
+                    message: "Статья не найдена",
+                });
+            }
+        },
+    
+    )
     } catch (err) {
         console.log(err);
         res.status(500).json({

@@ -23,7 +23,7 @@ app.get("/auth/me", checkAuth, userController.getMe);
 
 
 app.get("/posts",  postController.getAll);
-//app.get("/posts/:id", postController.getOne);
+app.get("/posts/:id", postController.getOne);
 app.post("/posts", checkAuth, postCreateValidation, postController.create);
 //app.delete("/posts", postController.remove);
 //app.patch("/posts",  postController.update);
