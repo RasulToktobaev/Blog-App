@@ -97,7 +97,7 @@ export const create = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({
-            message: "Ошибка при созданий статьи",
+            message: "Произошла ошибка",
         });
     }
 }
