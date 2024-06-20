@@ -59,7 +59,7 @@ export const getOne = async (req, res) => {
     try {
         const postId = req.params.id;
 
-        // Проверьте валидность postId
+        
         if (!postId.match(/^[0-9a-fA-F]{24}$/)) {
             return res.status(400).json({ message: "Неверный ID статьи" });
         }
@@ -67,7 +67,7 @@ export const getOne = async (req, res) => {
         const doc = await PostModel.findOneAndUpdate(
             { _id: postId },
             { $inc: { viewsCount: 1 } },
-            { returnDocument: 'after', new: true } // new: true возвращает обновленный документ
+            { returnDocument: 'after', new: true } 
         ).exec();
 
         if (!doc) {
