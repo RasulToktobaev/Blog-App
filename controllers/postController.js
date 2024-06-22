@@ -59,7 +59,7 @@ export const getOne = async (req, res) => {
     try {
         const postId = req.params.id;
 
-        
+
         if (!postId.match(/^[0-9a-fA-F]{24}$/)) {
             return res.status(400).json({ message: "Неверный ID статьи" });
         }
@@ -67,7 +67,7 @@ export const getOne = async (req, res) => {
         const doc = await PostModel.findOneAndUpdate(
             { _id: postId },
             { $inc: { viewsCount: 1 } },
-            { returnDocument: 'after', new: true } 
+            { returnDocument: 'after', new: true }
         ).exec();
 
         if (!doc) {
@@ -78,6 +78,18 @@ export const getOne = async (req, res) => {
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Не удалось получить статью" });
+    }
+}
+
+export const remove = async (req, res) => {
+    try{
+        const postId = req.params.id;
+        PostModel.findOneAndDelete({
+            _id: postId,
+            
+        })
+    } catch (err) {
+
     }
 }
 
