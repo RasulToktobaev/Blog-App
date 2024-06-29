@@ -1,9 +1,11 @@
 import express from "express";
+import multer from "multer";
 import mongoose from "mongoose";
 import { registerValidator, loginValidator, postCreateValidation } from './validations.js';
 import checkAuth from './utils/checkAuth.js';
 import * as userController from './controllers/userController.js';
 import * as postController from './controllers/postController.js';
+
 
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/blog",
@@ -12,6 +14,12 @@ mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongo
     .catch((err) => console.log("Db error", err));
 
 const app = express();
+
+const storage = multer.diskStorage({
+    destination : (_, _, cb) => {
+        cb(null, 'uploads');
+    }
+});
 
 app.use(express.json());
 
