@@ -82,7 +82,7 @@ export const getOne = async (req, res) => {
 }
 
 export const remove = async (req, res) => {
-    try{
+    try {
         const postId = req.params.id;
         PostModel.findOneAndDelete({
             _id: postId,
@@ -101,7 +101,7 @@ export const remove = async (req, res) => {
             }
 
             res.json({
-                success:true
+                success: true
             });
         })
     } catch (err) {
@@ -130,5 +130,25 @@ export const create = async (req, res) => {
         res.status(500).json({
             message: "Ошибка при созданий статьи",
         });
+    }
+}
+
+export const update = async (req, res) => {
+    try {
+        const postId = req.params.id;
+
+        await PostModel.updateOne({
+            _id: postId,
+        } , {
+            title: req.body.title,
+            text: req.body.text,
+            imageUrl: req.body.imageUrl,
+            tags: req.body.tags,
+            user: req.userId,
+        })
+    } catch (err) {
+
+
+
     }
 }

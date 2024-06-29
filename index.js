@@ -25,8 +25,8 @@ app.get("/auth/me", checkAuth, userController.getMe);
 app.get("/posts",  postController.getAll);
 app.get("/posts/:id", postController.getOne);
 app.post("/posts", checkAuth, postCreateValidation, postController.create);
-app.delete("/posts/id", postController.remove);
-//app.patch("/posts",  postController.update);
+app.delete("/posts/:id", checkAuth, postController.remove);
+app.patch("/posts/:id",  postController.update);
 
 
 app.listen(4444, (err) => {
