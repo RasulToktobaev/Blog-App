@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import { registerValidator, loginValidator, postCreateValidation } from './validations.js';
 import {handleValidationErrors, checkAuth} from "./utils/index.js"
 import {postController, userController} from './controllers/index.js';
+import cors from 'cors'
 
 
 mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongodb.net/blog")
@@ -24,6 +25,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 app.use(express.json());
+
+app.use(cors())
 app.use('/uploads', express.static('uploads'));
 
 app.post('/auth/login', loginValidator, handleValidationErrors, userController.login);
