@@ -11,6 +11,8 @@ mongoose.connect("mongodb+srv://toktobaevrasul2002:wwwwww@cluster0.uppwel6.mongo
     .then(() => console.log('Connected to database'))
     .catch((err) => console.log("Db error", err));
 
+
+
 const app = express();
 
 const storage = multer.diskStorage({
