@@ -92,8 +92,10 @@ export const getOne = async (req, res) => {
             return res.status(404).json({ message: "Статья не найдена" });
         }
 
-        res.json(doc);
-    } catch (err) {
+        res.json(doc).populate('user');
+
+    }
+    catch (err) {
         console.log(err);
         res.status(500).json({ message: "Не удалось получить статью" });
     }
